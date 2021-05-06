@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MustMatch } from './_helpers/must-match.validator'
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -8,19 +8,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ReactiveFormComponent implements OnInit {
   empRegistrationForm:FormGroup;
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.empRegistrationForm = new FormGroup({
-      'fullName':new FormControl(null),
-      'address':new FormControl(null),
-      'city':new FormControl(null),
-      'email':new FormControl(null),
-      'phoneNo':new FormControl(null),
-      'password':new FormControl(null),
-      'confirmPassword':new FormControl(null),
-      'termsandconditions': new FormControl(null)
-    });
+    this.empRegistrationForm = this.fb.group({
+      fullName:["", Validators.required],
+      address:["",Validators.required],
+      city:["",Validators.required],
+      email:["",[Validators.required, Validators.email]],
+      phoneNo:["",[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10), Validators.maxLength(12)]],
+      password:["",[Validators.required, Validators.minLength(6)]],
+      confirmPassword:["", [Validators.required, Validators.minLength(6)]],
+    })
   }
 
   onSubmit(){
