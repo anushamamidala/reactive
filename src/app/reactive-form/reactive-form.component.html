@@ -1,43 +1,201 @@
 <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
-        <h1 class="mb-3 mt-3">Employee Registration Form</h1>
-        <form [formGroup]="empRegistrationForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-               <input type="text" class="form-control"
-                id="fullName" formControlName = "fullName" placeholder="Full Name">
-            </div>  
-            <div class="form-group">
-                <input type="text" class="form-control"
-                 id="address" formControlName = "address" placeholder="Address">
-             </div>
-             <div class="form-group">
-                <input type="text" class="form-control"
-                 id="city" formControlName = "city" placeholder="City">
-             </div>             
-            <div class="form-group">
-              <input type="email" class="form-control" 
-              id="email" formControlName = "email" placeholder="Email">
-           </div>
-             <div class="form-group">
-                <input type="text" class="form-control"
-                 id="phoneNo" formControlName = "phoneNo" placeholder="Phone Number">
-             </div>
-             <div class="form-group">
-                <input type="password" class="form-control"
-                 id="password" formControlName = "password" placeholder="Password">
-             </div>
-             <div class="form-group">
-                <input type="password" class="form-control"
-                 id="confirmPassword" formControlName = "confirmPassword" placeholder="Confirm Password">
-             </div>  
-             <div class="form-check mb-3">
-              <input type="checkbox" class="form-check-input"
-               id="termsandconditions" formControlName = "termsandconditions"> Agree with terms and conditions
-           </div>  
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
+      <h1 class="mb-3 mt-3">Employee Registration Form</h1>
+      <form [formGroup]="empRegistrationForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('fullName').invalid &&
+            (empRegistrationForm.get('fullName').dirty ||
+              empRegistrationForm.get('fullName').touched)) }"
+            id="fullName"
+            formControlName="fullName"
+            placeholder="Full Name"
+          />
+          <div
+            *ngIf="
+              empRegistrationForm.get('fullName').invalid &&
+              (empRegistrationForm.get('fullName').dirty ||
+                empRegistrationForm.get('fullName').touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="empRegistrationForm.get('fullName').errors.required" >
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control "
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('address').invalid &&
+            (empRegistrationForm.get('address').dirty ||
+              empRegistrationForm.get('address').touched)) }"
+            id="address"
+            formControlName="address"
+            placeholder="Address"
+          />
+          <div
+            *ngIf="
+              empRegistrationForm.get('address').invalid &&
+              (empRegistrationForm.get('address').dirty ||
+                empRegistrationForm.get('address').touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="empRegistrationForm.get('address').errors.required">
+              Address is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('city').invalid &&
+            (empRegistrationForm.get('city').dirty ||
+              empRegistrationForm.get('city').touched)) }"
+            id="city"
+            formControlName="city"
+            placeholder="City"
+          />
+          <div
+            *ngIf="
+              empRegistrationForm.get('city').invalid &&
+              (empRegistrationForm.get('city').dirty ||
+                empRegistrationForm.get('city').touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="empRegistrationForm.get('city').errors.required">
+              City is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('email').invalid &&
+            (empRegistrationForm.get('email').dirty ||
+              empRegistrationForm.get('email').touched)) }"
+            id="email"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <div
+            *ngIf="
+              empRegistrationForm.get('email').invalid &&
+              (empRegistrationForm.get('email').dirty ||
+                empRegistrationForm.get('email').touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="empRegistrationForm.get('email').errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="empRegistrationForm.get('email').errors.email">
+              Enter a valid email address, e.g., john@example.com
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('phoneNo').invalid &&
+            (empRegistrationForm.get('phoneNo').dirty ||
+              empRegistrationForm.get('phoneNo').touched)) }"
+            id="phoneNo"
+            formControlName="phoneNo"
+            placeholder="Phone Number"
+          />
+          <div
+            *ngIf="
+              empRegistrationForm.get('phoneNo').invalid &&
+              (empRegistrationForm.get('phoneNo').dirty ||
+                empRegistrationForm.get('phoneNo').touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="empRegistrationForm.get('phoneNo').errors.required">
+              Phone Number is required.
+            </div>
+           
+            <div *ngIf="empRegistrationForm.get('phoneNo').errors.pattern  || empRegistrationForm.get('phoneNo').errors.minLength || empRegistrationForm.get('phoneNo').errors.maxLength" >
+              Phone number must be minimum 10 digits and maximum 12 digits
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('password').invalid &&
+            (empRegistrationForm.get('password').dirty ||
+              empRegistrationForm.get('password').touched)) }"
+            id="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div
+          *ngIf="
+            empRegistrationForm.get('password').invalid &&
+            (empRegistrationForm.get('password').dirty ||
+              empRegistrationForm.get('password').touched)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="empRegistrationForm.get('password').errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="empRegistrationForm.get('password').errors.minLength">
+            Password Length must be greater than 6
+          </div>
+        </div> 
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{'is-invalid'  : (empRegistrationForm.get('confirmPassword').invalid &&
+            (empRegistrationForm.get('confirmPassword').dirty ||
+              empRegistrationForm.get('confirmPassword').touched)) }"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+          />
+          <div
+          *ngIf="
+            empRegistrationForm.get('confirmPassword').invalid &&
+            (empRegistrationForm.get('confirmPassword').dirty ||
+              empRegistrationForm.get('confirmPassword').touched)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="empRegistrationForm.get('confirmPassword').errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="empRegistrationForm.get('confirmPassword').errors.minLength">
+            Password must be atleast 6 Characters
+          </div>
+        </div>
+        </div>
+        <div class="form-check mb-3">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="termsandconditions"
+            formControlName="termsandconditions"
+          />
+          Agree with terms and conditions
+        </div>
 
-          <button class="btn btn-primary" type="submit">Register</button> 
-        </form>
-      </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+      </form>
     </div>
   </div>
+</div>
