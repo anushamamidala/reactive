@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MustMatch } from './_helpers/must-match.validator'
+import { MustMatch } from 'must-match.validator'
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
